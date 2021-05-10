@@ -236,42 +236,42 @@ function GetRandom(){
         myElement8.value = bigAlphabet[Math.floor(Math.random() * bigAlphabet.length)] + bigAlphabet[Math.floor(Math.random() * bigAlphabet.length)] + bigAlphabet[Math.floor(Math.random() * bigAlphabet.length)] + Math.floor(Math.random() * 899999 + 100000).toString();
 }
 
-			function getContactFromForm() {
-				return {
-					name: document.getElementById('name').value,
-					city: document.getElementById('city').value,
-					adress: document.getElementById('adress').value,
-					email: document.getElementById('email').value,
-					id_card: document.getElementById('id_card').value,
-				};
-			}
-			function setFormToContact(data){
-				document.getElementById('name').value = data.name;
-				document.getElementById('city').value = data.city;
-				document.getElementById('adress').value = data.adress;
-				document.getElementById('email').value = data.email;
-				document.getElementById('id_card').value = data.id_card;
-			}
-			  window.addEventListener('DOMContentLoaded', (event) => {
-			  var worker = new Worker('js/webworker.js');
-			  worker.onmessage = function(e) {
-				setFormToContact(e.data);
-			  }
+function getContactFromForm() {
+	return {
+		name: document.getElementById('name').value,
+		city: document.getElementById('city').value,
+		adress: document.getElementById('adress').value,
+		email: document.getElementById('email').value,
+		id_card: document.getElementById('id_card').value,
+	};
+}
+function setFormToContact(data){
+	document.getElementById('name').value = data.name;
+	document.getElementById('city').value = data.city;
+	document.getElementById('adress').value = data.adress;
+	document.getElementById('email').value = data.email;
+	document.getElementById('id_card').value = data.id_card;
+}
+  window.addEventListener('DOMContentLoaded', (event) => {
+  var worker = new Worker('js/webworker.js');
+  worker.onmessage = function(e) {
+	setFormToContact(e.data);
+  }
 
-			  var worker_button = document.getElementById('worker_button');
+  var worker_button = document.getElementById('worker_button');
 
-			  worker_button.addEventListener('click', function(e) {
-				console.log('Message sent to worker');
-				worker.postMessage(getContactFromForm());
-			  });
-			});
-		
-			const input = document.getElementById('imageLink');
-			const log = document.getElementById('imageShow');
+  worker_button.addEventListener('click', function(e) {
+	console.log('Message sent to worker');
+	worker.postMessage(getContactFromForm());
+  });
+});
 
-			input.addEventListener('change', updateValue);
+const input = document.getElementById('imageLink');
+const log = document.getElementById('imageShow');
 
-			function updateValue(e) {
-			  log.textContent = e.target.value;
-			  document.getElementById('imageShow').src = e.target.value;
-			}
+input.addEventListener('change', updateValue);
+
+function updateValue(e) {
+  log.textContent = e.target.value;
+  document.getElementById('imageShow').src = e.target.value;
+}
