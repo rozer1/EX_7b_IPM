@@ -84,6 +84,7 @@
 					city: document.getElementById('city').value,
 					adress: document.getElementById('adress').value,
 					email: document.getElementById('email').value,
+					id_card: document.getElementById('id_card').value,
 				};
 			}
 			function setFormToContact(data){
@@ -91,6 +92,7 @@
 				document.getElementById('city').value = data.city;
 				document.getElementById('adress').value = data.adress;
 				document.getElementById('email').value = data.email;
+				document.getElementById('id_card').value = data.id_card;
 			}
 			  window.addEventListener('DOMContentLoaded', (event) => {
 			  var worker = new Worker('js/webworker.js');
