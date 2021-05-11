@@ -272,35 +272,25 @@ function sendDataToImgWorker(worker) {
 	console.log('Message sent to worker');
 	worker.postMessage(getContactFromForm());
   });
-});
 
-const input = document.getElementById('imageLink');
-const log = document.getElementById('imageShow');
+	// Image filter
+	var imageFilterWorker = new Worker('js/imgworker.js');
+	imageFilterWorker.onmessage = function(e) {
+	  console.log("color: ", e.data);
+	  document.getElementById('imageShow').style.setProperty('--filter', `rgb(${e.data.r}, ${e.data.g}, ${e.data.b})`);
+	}
+	var urlElement = document.getElementById('image-url');
+	urlElement.addEventListener('input', function(e) {
+	  document.getElementById('imageShow').style.backgroundImage = `url(${urlElement.value})`;
+	});
 
-input.addEventListener('change', updateValue);
+	var form = document.getElementById("addContact");
+	form.addEventListener('input', function() {
+	  sendDataToImgWorker(imageFilterWorker);
+	});
 
-function updateValue(e) {
-  log.textContent = e.target.value;
-  document.getElementById('imageShow').src = e.target.value;
-}
-
-// Image filter
-var imageFilterWorker = new Worker('js/imgworker.js');
-imageFilterWorker.onmessage = function(e) {
-  console.log("color: ", e.data);
-  document.getElementById('imageShow').style.setProperty('--filter', `rgb(${e.data.r}, ${e.data.g}, ${e.data.b})`);
-}
-var urlElement = document.getElementById('image-url');
-urlElement.addEventListener('input', function(e) {
-  document.getElementById('imageShow').style.backgroundImage = `url(${urlElement.value})`;
-});
-
-var form = document.getElementById("addContact");
-form.addEventListener('input', function() {
-  sendDataToImgWorker(imageFilterWorker);
-});
-
-var generate = document.getElementById('generate_data');
-generate.addEventListener('click', function(e) {
-sendDataToImgWorker(imageFilterWorker);
+	var generate = document.getElementById('generate_data');
+	generate.addEventListener('click', function(e) {
+	sendDataToImgWorker(imageFilterWorker);
+	});
 });
