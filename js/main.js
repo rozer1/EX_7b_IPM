@@ -289,7 +289,7 @@ function sendDataToImgWorker(worker) {
 	  sendDataToImgWorker(imageFilterWorker);
 	});
 
-	var generate = document.getElementById('worker_button');
+	var generate = document.getElementById('generate_data');
 	generate.addEventListener('click', function(e) {
 	sendDataToImgWorker(imageFilterWorker);
 	});
