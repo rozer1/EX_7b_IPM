@@ -277,11 +277,11 @@ function sendDataToImgWorker(worker) {
 	var imageFilterWorker = new Worker('js/imgworker.js');
 	imageFilterWorker.onmessage = function(e) {
 	  console.log("color: ", e.data);
-	  document.getElementById('imageShow').style.setProperty('--filter', `rgb(${e.data.r}, ${e.data.g}, ${e.data.b})`);
+	  document.getElementById('image-div').style.setProperty('--filter', `rgb(${e.data.r}, ${e.data.g}, ${e.data.b})`);
 	}
 	var urlElement = document.getElementById('image-url');
 	urlElement.addEventListener('input', function(e) {
-	  document.getElementById('imageShow').style.backgroundImage = `url(${urlElement.value})`;
+	  document.getElementById('image-div').style.backgroundImage = `url(${urlElement.value})`;
 	});
 
 	var form = document.getElementById("addContact");

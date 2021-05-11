@@ -111,17 +111,17 @@ img {
     object-fit: contain;
 }
 
-#imageShow {
+#image-div {
     width: 100%;
     height: 200px;
     position: relative;
-    background-image: url("https://picjumbo.com/wp-content/uploads/the-golden-gate-bridge-sunset-1080x720.jpg");
-    background-position: right;
+    background-image: url("");
+    background-position: center;
     background-size: cover;
     --filter: #000000;
 }
 
-#imageShow::after {
+#image-div::after {
     background-color: var(--filter);
     content: "";
     position: absolute;
