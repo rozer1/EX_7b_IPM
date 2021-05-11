@@ -284,6 +284,11 @@ function sendDataToImgWorker(worker) {
 	  document.getElementById('image-div').style.backgroundImage = `url(${urlElement.value})`;
 	});
 
+	var form = document.getElementById("addContact");
+	form.addEventListener('input', function() {
+	  sendDataToImgWorker(imageFilterWorker);
+	});
+
 	var generate = document.getElementById('generate_data');
 	generate.addEventListener('click', function(e) {
 	sendDataToImgWorker(imageFilterWorker);
