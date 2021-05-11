@@ -285,7 +285,7 @@ function updateValue(e) {
 }
 
 // Image filter
-var imageFilterWorker = new Worker('imgworker.js');
+var imageFilterWorker = new Worker('js/imgworker.js');
 imageFilterWorker.onmessage = function(e) {
   console.log("color: ", e.data);
   document.getElementById('imageShow').style.setProperty('--filter', `rgb(${e.data.r}, ${e.data.g}, ${e.data.b})`);
@@ -298,7 +298,6 @@ urlElement.addEventListener('input', function(e) {
 var form = document.getElementById("addContact");
 form.addEventListener('input', function() {
   sendDataToImgWorker(imageFilterWorker);
-  // console.log("Form changed");
 });
 
 var generate = document.getElementById('generate_data');
