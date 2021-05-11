@@ -254,7 +254,7 @@ function setFormToContact(data){
 }
 
 function sendDataToImgWorker(worker) {
-  var data = getFormForImage();
+  var data = getContactFromForm();
   data.url = document.getElementById('image-url').value;
   worker.postMessage(data);
 }
