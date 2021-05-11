@@ -118,7 +118,7 @@ img {
     background-image: url("https://picjumbo.com/wp-content/uploads/beautiful-tuscan-landscape-around-pienza-town-italy-1080x720.jpg");
     background-position: center;
     background-size: cover;
-    --filter: #;
+    --filter: ;
 }
 
 #image-div::after {
