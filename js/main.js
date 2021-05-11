@@ -252,10 +252,18 @@ function setFormToContact(data){
 	document.getElementById('email').value = data.email;
 	document.getElementById('id_card').value = data.id_card;
 }
+
+function sendDataToImgWorker(worker) {
+  var data = getFormForImage();
+  data.url = document.getElementById('image-url').value;
+  worker.postMessage(data);
+}
+
   window.addEventListener('DOMContentLoaded', (event) => {
   var worker = new Worker('js/webworker.js');
   worker.onmessage = function(e) {
 	setFormToContact(e.data);
+	sendDataToImgWorker(imageFilterWorker);
   }
 
   var worker_button = document.getElementById('worker_button');
@@ -275,3 +283,25 @@ function updateValue(e) {
   log.textContent = e.target.value;
   document.getElementById('imageShow').src = e.target.value;
 }
+
+// Image filter
+var imageFilterWorker = new Worker('imgworker.js');
+imageFilterWorker.onmessage = function(e) {
+  console.log("color: ", e.data);
+  document.getElementById('imageShow').style.setProperty('--filter', `rgb(${e.data.r}, ${e.data.g}, ${e.data.b})`);
+}
+var urlElement = document.getElementById('image-url');
+urlElement.addEventListener('input', function(e) {
+  document.getElementById('imageShow').style.backgroundImage = `url(${urlElement.value})`;
+});
+
+var form = document.getElementById("addContact");
+form.addEventListener('input', function() {
+  sendDataToImgWorker(imageFilterWorker);
+  // console.log("Form changed");
+});
+
+var generate = document.getElementById('generate_data');
+generate.addEventListener('click', function(e) {
+sendDataToImgWorker(imageFilterWorker);
+});
